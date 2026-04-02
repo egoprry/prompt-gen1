@@ -1,0 +1,504 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&display=swap');
+
+  body {
+    background: #040404;
+  }
+
+  /* div {
+    padding: 4px;
+  }
+
+  span {
+    padding: 4px;
+  } */
+  #pgr {
+    --teal: #00ffe0;
+    --red: #ff2200;
+    --yellow: #ffe600;
+    --bg: #000000;
+    --surf: #0a0a0a;
+    --border: rgba(0, 255, 224, 0.25);
+    --border-hi: rgba(0, 255, 224, 0.7);
+    --muted: rgba(0, 255, 224, 0.4);
+    --font-m: 'Share Tech Mono', 'Courier New', monospace;
+    --font-d: 'Bebas Neue', 'Impact', sans-serif;
+  }
+
+  #pgr * {
+    box-sizing: border-box;
+    margin: 4px;
+    padding: 4px;
+  }
+
+  #pgr {
+    background: #000;
+    font-family: var(--font-m);
+    color: var(--teal);
+    padding: 32px 28px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #pgr .scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 0, 0, 0.25) 3px, rgba(0, 0, 0, 0.25) 4px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #pgr .glow-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 180px;
+    background: radial-gradient(ellipse at 50% -20%, rgba(0, 255, 224, 0.09) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #pgr>*:not(.scanlines):not(.glow-top) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pg-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border-hi);
+  }
+
+  .pg-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .pg-title {
+    font-family: var(--font-d);
+    font-size: 52px;
+    letter-spacing: 0.1em;
+    color: var(--teal);
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(0, 255, 224, 0.4), 0 0 60px rgba(0, 255, 224, 0.15);
+  }
+
+  .pg-meta {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .pg-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-right: 6px;
+    box-shadow: 0 0 6px var(--teal);
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink {
+
+    0%,
+    100% {
+      opacity: 1
+    }
+
+    50% {
+      opacity: 0.15
+    }
+  }
+
+  .pg-output-wrap {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .pg-output {
+    background: #000;
+    border: 1px solid var(--border-hi);
+    padding: 22px 20px 22px;
+    position: relative;
+    min-height: 90px;
+  }
+
+  .pg-output-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .pg-output-text {
+    font-size: 16px;
+    line-height: 1.7;
+    word-break: break-word;
+    letter-spacing: 0.02em;
+  }
+
+  .corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--teal);
+  }
+
+  .corner.tl {
+    top: -1px;
+    left: -1px;
+    border-style: solid;
+    border-width: 2px 0 0 2px;
+  }
+
+  .corner.tr {
+    top: -1px;
+    right: -1px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+  }
+
+  .corner.bl {
+    bottom: -1px;
+    left: -1px;
+    border-style: solid;
+    border-width: 0 0 2px 2px;
+  }
+
+  .corner.br {
+    bottom: -1px;
+    right: -1px;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+  }
+
+  .pg-copy {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-m);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 5px 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all .15s;
+  }
+
+  .pg-copy:hover,
+  .pg-copy.ok {
+    border-color: var(--teal);
+    color: var(--teal);
+    text-shadow: 0 0 8px rgba(0, 255, 224, 0.5);
+  }
+
+  .pg-slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .pg-slot {
+    background: #000;
+    border: 1px solid rgba(0, 255, 224, 0.18);
+    padding: 14px 14px 12px;
+    transition: border-color .15s;
+  }
+
+  .pg-slot.locked {
+    border-color: rgba(0, 255, 224, 0.55);
+  }
+
+  .pg-slot-label {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    color: rgba(0, 255, 224, 0.45);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .pg-slot-value {
+    font-size: 15px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  .pg-slot-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .pg-sbtn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 224, 0.15);
+    color: rgba(0, 255, 224, 0.4);
+    font-family: var(--font-m);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 8px !important;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all .12s;
+    text-align: center;
+  }
+
+  .pg-sbtn:hover:not(:disabled) {
+    border-color: rgba(0, 255, 224, 0.6);
+    color: var(--teal);
+  }
+
+  .pg-sbtn.on {
+    border-color: rgba(0, 255, 224, 0.55);
+    color: var(--teal);
+  }
+
+  .pg-sbtn:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+
+  .pg-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .pg-gen {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    font-family: var(--font-d);
+    font-size: 28px;
+    letter-spacing: 0.25em;
+    padding: 13px 0;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all .15s;
+    text-shadow: 0 0 12px rgba(0, 255, 224, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pg-gen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--teal);
+    opacity: 0;
+    transition: opacity .15s;
+  }
+
+  .pg-gen:hover::after {
+    opacity: 0.06;
+  }
+
+  .pg-gen:active {
+    transform: scale(0.99);
+  }
+
+  .pg-rst {
+    background: transparent;
+    border: 1px solid rgba(255, 34, 0, 0.3);
+    color: rgba(255, 34, 0, 0.45);
+    font-family: var(--font-m);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    padding: 13px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all .15s;
+  }
+
+  .pg-rst:hover {
+    border-color: var(--red);
+    color: var(--red);
+  }
+
+  .pg-hist-label {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: rgba(0, 255, 224, 0.3);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .pg-hist-divider {
+    height: 1px;
+    background: rgba(0, 255, 224, 0.12);
+    margin-bottom: 18px;
+  }
+
+  .pg-hist-item {
+    font-size: 12px;
+    color: rgba(0, 255, 224, 0.3);
+    padding: 9px 12px;
+    border: 1px solid rgba(0, 255, 224, 0.08);
+    margin-bottom: 6px;
+    cursor: pointer;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    transition: all .12s;
+  }
+
+  .pg-hist-item:hover {
+    border-color: rgba(0, 255, 224, 0.25);
+    color: rgba(0, 255, 224, 0.6);
+  }
+
+  .cs {
+    color: #00ffe0;
+  }
+
+  .cg {
+    color: #ff6a00;
+  }
+
+  .cp {
+    color: #aadd55;
+  }
+
+  .ce {
+    color: #44ddaa;
+  }
+
+  .cd {
+    color: #88bbff;
+  }
+
+  .cr {
+    color: #cc99ff;
+  }
+</style>
+
+<div id="pgr">
+  <div class="scanlines"></div>
+  <div class="glow-top"></div>
+
+  <div class="pg-header">
+    <div>
+      <div class="pg-eyebrow">WANGHAF // Midjourney Formula Engine</div>
+      <div class="pg-title">PROMPT GEN</div>
+    </div>
+    <div class="pg-meta">
+      <div><span class="pg-dot"></span>SYSTEM ONLINE</div>
+      <div style="margin-top:4px;">MJ V7 // FORMULA MODE</div>
+      <div style="margin-top:4px;font-size:10px;letter-spacing:0.08em;color:rgba(0,255,224,0.25);" id="pg-counter">OUTPUT: 000</div>
+    </div>
+  </div>
+
+  <div class="pg-output-wrap">
+    <div class="pg-output" id="pg-output">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="pg-output-label">// OUTPUT PROMPT</div>
+      <div class="pg-output-text" id="pg-text"></div>
+      <button class="pg-copy" id="pg-copy">COPY</button>
+    </div>
+  </div>
+
+  <div class="pg-slots" id="pg-slots"></div>
+
+  <div class="pg-actions">
+    <button class="pg-gen" id="pg-gen">GENERATE ↺</button>
+    <button class="pg-rst" id="pg-rst">RESET</button>
+  </div>
+
+  <div id="pg-hist-wrap" style="display:none;">
+    <div class="pg-hist-divider"></div>
+    <div class="pg-hist-label">// Recent Outputs — click to copy</div>
+    <div id="pg-hist-list"></div>
+  </div>
+</div>
+
+<script>
+  const V = {
+    subject: ["Man", "Woman", "Figure", "Child", "Crowd", "Twins", "Soldier", "Elder", "Warrior", "Priest", "Prophet", "Body", "Ghost", "Machine", "Stranger"],
+    genre: ["horror transhumanism", "horror biomechanics", "horror parasitism", "horror entropy", "horror surveillance", "horror liminality", "horror urbanism", "horror somnambulism", "horror cartography", "horror body modification", "mythology dissolution", "mythology exile", "divinity collapse", "theology erosion", "shamanism ascent", "ecology collapse", "symbiosis inversion", "flora possession", "fauna merger", "terrain absorption", "authority corruption", "hierarchy collapse", "ideology fracture", "institution decay", "resistance emergence", "obsession spiral", "memory erosion", "grief architecture", "paranoia geometry", "ego dissolution", "violence economy", "loyalty collapse", "ritual punishment", "predation elegance", "underworld ascent"],
+    prop: ["clock", "spine", "mirror", "candle", "wire", "eye", "mouth", "thread", "photograph", "knife", "crown", "flag", "uniform", "coin", "scar", "root", "spore", "feather", "stone", "seal", "bone", "gear", "circuit", "glass", "silk", "needle", "door", "altar", "map", "relic"],
+    echo: ["time", "architecture", "ritual decay", "threshold", "signal loss", "nerve", "void", "absence", "repetition", "distance", "angle", "face", "transaction", "oath", "code", "crossing", "age", "vision", "silence", "faith", "spread", "instinct", "weight", "decree", "mass", "border", "rule", "fist", "wall", "erasure", "descent", "hunger", "pressure"],
+    directive: ["high-contrast", "overexposed blown-out", "underlit shadow-heavy", "grainy low-resolution", "flat graphic two-tone", "heavily textured gritty", "high-grain", "low-key editorial", "monochrome", "duotone", "overexposed washed", "clinical sharp", "halftone degraded", "deep chiaroscuro", "bleached archival"],
+    era: ["2000s aesthetic", "90s industrial aesthetic", "80s sci-fi aesthetic", "70s exploitation aesthetic", "70s cinema verité aesthetic", "art deco aesthetic", "Cold War propaganda aesthetic", "Byzantine aesthetic", "Roman fresco aesthetic", "medieval manuscript aesthetic", "Victorian naturalist aesthetic", "Weimar expressionist aesthetic", "Soviet propaganda aesthetic", "constructivist poster aesthetic", "Hitchcock noir aesthetic", "neo-noir aesthetic", "outsider art aesthetic", "darkroom aesthetic", "slow cinema aesthetic", "technical drawing aesthetic", "experimental theater aesthetic", "brutalist noir aesthetic", "brutalist aesthetic", "90s zine aesthetic", "millennium aesthetic"]
+  };
+  const KEYS = ["subject", "genre", "prop", "echo", "directive", "era"];
+  const LABELS = { subject: "Subject", genre: "Genre Fusion", prop: "Prop", echo: "Echo", directive: "Directive", era: "Era Anchor" };
+  const CLS = { subject: "cs", genre: "cg", prop: "cp", echo: "ce", directive: "cd", era: "cr" };
+
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function rslots() { const s = {}; KEYS.forEach(k => s[k] = pick(V[k])); return s; }
+
+  let slots = rslots(), locked = { subject: false, genre: false, prop: false, echo: false, directive: false, era: false }, hist = [], count = 0;
+
+  function getP() { return `${slots.subject} ${slots.genre}, ${slots.prop}, ${slots.echo}, ${slots.directive} ${slots.era}`; }
+
+  function rPrompt() {
+    document.getElementById("pg-text").innerHTML = `<span class="cs">${slots.subject}</span> <span class="cg">${slots.genre}</span>, <span class="cp">${slots.prop}</span>, <span class="ce">${slots.echo}</span>, <span class="cd">${slots.directive}</span> <span class="cr">${slots.era}</span>`;
+  }
+
+  function rSlots() {
+    document.getElementById("pg-slots").innerHTML = KEYS.map(k => `
+    <div class="pg-slot${locked[k] ? ' locked' : ''}">
+      <div class="pg-slot-label">${LABELS[k]}</div>
+      <div class="pg-slot-value ${CLS[k]}">${slots[k]}</div>
+      <div class="pg-slot-actions">
+        <button class="pg-sbtn${locked[k] ? ' on' : ''}" data-lock="${k}">${locked[k] ? 'LOCKED' : 'LOCK'}</button>
+        <button class="pg-sbtn" data-reroll="${k}" ${locked[k] ? 'disabled' : ''}>↺</button>
+      </div>
+    </div>`).join('');
+    document.querySelectorAll('[data-lock]').forEach(b => b.onclick = () => { locked[b.dataset.lock] = !locked[b.dataset.lock]; rSlots(); });
+    document.querySelectorAll('[data-reroll]').forEach(b => b.onclick = () => { const k = b.dataset.reroll; if (!locked[k]) { slots[k] = pick(V[k]); rPrompt(); rSlots(); } });
+  }
+
+  function rHist() {
+    const w = document.getElementById("pg-hist-wrap");
+    if (!hist.length) { w.style.display = 'none'; return; }
+    w.style.display = 'block';
+    document.getElementById("pg-hist-list").innerHTML = hist.map((p, i) => `<div class="pg-hist-item" data-hi="${i}">${p}</div>`).join('');
+    document.querySelectorAll('[data-hi]').forEach(el => el.onclick = () => navigator.clipboard.writeText(hist[el.dataset.hi]));
+  }
+
+  document.getElementById("pg-gen").onclick = () => {
+    hist = [getP(), ...hist].slice(0, 8);
+    KEYS.forEach(k => { if (!locked[k]) slots[k] = pick(V[k]); });
+    count++;
+    document.getElementById("pg-counter").textContent = `OUTPUT: ${String(count).padStart(3, '0')}`;
+    rPrompt(); rSlots(); rHist();
+  };
+
+  document.getElementById("pg-rst").onclick = () => {
+    slots = rslots(); locked = { subject: false, genre: false, prop: false, echo: false, directive: false, era: false };
+    rPrompt(); rSlots();
+  };
+
+  document.getElementById("pg-copy").onclick = function() {
+    navigator.clipboard.writeText(getP()).then(() => {
+      this.textContent = 'OK ✓'; this.classList.add('ok');
+      setTimeout(() => { this.textContent = 'COPY'; this.classList.remove('ok'); }, 1800);
+    });
+  };
+
+  rPrompt(); rSlots();
+</script>
