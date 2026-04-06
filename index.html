@@ -8,40 +8,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── Geist Design System – Dark Mode Tokens ── */
+    /* ── shadcn/ui Dark Theme Tokens ── */
     :root {
-      --ds-bg-100:    #000000;
-      --ds-bg-200:    #0a0a0a;
-      --ds-gray-100:  #111111;
-      --ds-gray-200:  #1a1a1a;
-      --ds-gray-300:  #262626;
-      --ds-gray-400:  #363636;
-      --ds-gray-500:  #4a4a4a;
-      --ds-gray-600:  #787878;
-      --ds-gray-700:  #a8a8a8;
-      --ds-gray-800:  #b4b4b4;
-      --ds-gray-900:  #e8e8e8;
-      --ds-gray-1000: #ffffff;
+      --background:    hsl(240 10% 3.9%);
+      --foreground:    hsl(0 0% 98%);
+      --card:          hsl(240 10% 3.9%);
+      --card-foreground: hsl(0 0% 98%);
+      --popover:       hsl(240 10% 3.9%);
+      --primary:       hsl(0 0% 98%);
+      --primary-foreground: hsl(240 5.9% 10%);
+      --secondary:     hsl(240 3.7% 15.9%);
+      --secondary-foreground: hsl(0 0% 98%);
+      --muted:         hsl(240 3.7% 15.9%);
+      --muted-foreground: hsl(240 5% 64.9%);
+      --accent:        hsl(240 3.7% 15.9%);
+      --accent-foreground: hsl(0 0% 98%);
+      --destructive:   hsl(0 62.8% 30.6%);
+      --destructive-foreground: hsl(0 0% 98%);
+      --border:        hsl(240 3.7% 15.9%);
+      --input:         hsl(240 3.7% 15.9%);
+      --ring:          hsl(240 4.9% 83.9%);
 
-      --accent:        #00ffe0;
-      --accent-subtle: rgba(0,255,224,0.07);
-      --accent-border: rgba(0,255,224,0.28);
-      --accent-dim:    rgba(0,255,224,0.60);
-
-      --red:        #ff5555;
-      --red-subtle: rgba(255,85,85,0.08);
-      --red-border: rgba(255,85,85,0.32);
-      --red-dim:    rgba(255,85,85,0.60);
-
-      --border:       var(--ds-gray-400);
-      --border-hover: var(--ds-gray-600);
-      --surface:      #0d0d0d;
-
-      --text-primary:   var(--ds-gray-1000);
-      --text-secondary: var(--ds-gray-800);
-      --text-tertiary:  var(--ds-gray-700);
-
-      /* Prompt token colors */
+      /* Prompt token colors – kept from original */
       --c-subject:   #00ffe0;
       --c-genre:     #ff8c42;
       --c-prop:      #a8e063;
@@ -50,17 +38,15 @@
       --c-era:       #c4b5fd;
       --c-framing:   #fbbf24;
 
-      --radius-sm: 5px;
-      --radius-md: 6px;
-      --radius-lg: 8px;
+      --radius: 0.5rem;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--ds-bg-100);
+      background: var(--background);
       font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text-primary);
+      color: var(--foreground);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
@@ -79,12 +65,11 @@
 
     /* ── Section label ── */
     .section-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-tertiary);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted-foreground);
       margin-bottom: 12px;
+      letter-spacing: -0.01em;
     }
 
     /* ── Divider ── */
@@ -107,21 +92,20 @@
 
     .pg-eyebrow {
       font-family: 'Geist Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
+      font-size: 12px;
+      color: var(--muted-foreground);
       margin-bottom: 10px;
     }
 
     .pg-title {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
       line-height: 1;
+      color: var(--foreground);
     }
 
-    .pg-title-accent { color: var(--accent); }
+    .pg-title-accent { color: var(--foreground); opacity: 0.5; }
 
     .pg-meta {
       display: flex;
@@ -137,8 +121,8 @@
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
       font-weight: 500;
-      color: var(--ds-gray-900);
-      background: var(--ds-gray-200);
+      color: var(--foreground);
+      background: var(--secondary);
       border: 1px solid var(--border);
       padding: 5px 12px;
       border-radius: 999px;
@@ -147,21 +131,20 @@
     .pg-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 6px var(--accent);
+      background: hsl(142 71% 45%);
+      box-shadow: 0 0 8px hsl(142 71% 45% / 0.6);
       flex-shrink: 0;
       animation: pulse 2.4s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%,100% { opacity:1; } 50% { opacity:0.15; }
+      0%,100% { opacity:1; } 50% { opacity:0.2; }
     }
 
     .pg-meta-row {
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
-      color: var(--text-secondary);
-      letter-spacing: 0.04em;
+      color: var(--muted-foreground);
     }
 
     /* ════════════════════════════════════════
@@ -180,16 +163,16 @@
       user-select: none;
     }
 
-    .flags-section-header:hover .section-label { color: var(--text-secondary); }
+    .flags-section-header:hover .section-label { color: var(--foreground); }
 
     .flags-chevron {
       display: flex;
       align-items: center;
-      color: var(--ds-gray-600);
+      color: var(--muted-foreground);
       transition: transform 0.2s ease, color 0.1s ease;
     }
 
-    .flags-section-header:hover .flags-chevron { color: var(--text-secondary); }
+    .flags-section-header:hover .flags-chevron { color: var(--foreground); }
 
     .flags-chevron.collapsed { transform: rotate(-90deg); }
 
@@ -203,9 +186,9 @@
     }
 
     .flags-card {
-      background: var(--surface);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius);
       overflow: hidden;
     }
 
@@ -214,12 +197,12 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      border-bottom: 1px solid var(--ds-gray-300);
+      border-bottom: 1px solid var(--border);
       transition: background 0.1s ease;
     }
 
     .flag-row:last-child { border-bottom: none; }
-    .flag-row:hover { background: var(--ds-gray-100); }
+    .flag-row:hover { background: var(--secondary); }
 
     .flag-left {
       display: flex;
@@ -231,41 +214,41 @@
       font-family: 'Geist Mono', monospace;
       font-size: 13px;
       font-weight: 500;
-      color: var(--text-primary);
+      color: var(--foreground);
       white-space: nowrap;
     }
 
-    .flag-row.disabled .flag-name { color: var(--text-tertiary); }
+    .flag-row.disabled .flag-name { color: var(--muted-foreground); }
 
     .flag-value-input {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
       font-weight: 500;
-      color: var(--text-primary);
-      background: var(--ds-gray-200);
-      border: 1px solid var(--ds-gray-400);
-      border-radius: var(--radius-sm);
-      padding: 3px 8px;
+      color: var(--foreground);
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) - 2px);
+      padding: 4px 8px;
       width: 68px;
       text-align: center;
-      transition: border-color 0.1s ease, background 0.1s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .flag-value-input:hover { border-color: var(--border-hover); }
+    .flag-value-input:hover { border-color: hsl(240 5% 34%); }
     .flag-value-input:focus {
       outline: none;
-      border-color: var(--ds-gray-700);
-      background: var(--ds-gray-300);
+      border-color: var(--ring);
+      box-shadow: 0 0 0 2px hsl(240 4.9% 83.9% / 0.15);
     }
     .flag-row.disabled .flag-value-input { opacity: 0.35; }
 
     .flag-desc {
       font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--muted-foreground);
       text-align: right;
     }
 
-    /* Geist toggle switch */
+    /* Toggle switch – shadcn style */
     .toggle {
       position: relative;
       width: 36px;
@@ -285,13 +268,13 @@
       position: absolute;
       inset: 0;
       border-radius: 999px;
-      background: var(--ds-gray-400);
+      background: hsl(240 3.7% 25%);
       transition: background 0.15s ease;
       cursor: pointer;
     }
 
     .toggle input:checked + .toggle-track {
-      background: var(--ds-gray-1000);
+      background: var(--foreground);
     }
 
     .toggle-thumb {
@@ -299,7 +282,7 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: var(--ds-gray-800);
+      background: var(--background);
       top: 3px;
       left: 3px;
       transition: transform 0.15s ease, background 0.15s ease;
@@ -308,7 +291,7 @@
 
     .toggle input:checked ~ .toggle-thumb {
       transform: translateX(16px);
-      background: var(--ds-bg-100);
+      background: var(--background);
     }
 
     /* ════════════════════════════════════════
@@ -323,35 +306,37 @@
     }
 
     .pg-output {
-      background: var(--surface);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
       padding: 20px 24px;
       position: relative;
       min-height: 100px;
       transition: border-color 0.15s ease;
     }
 
-    .pg-output.has-content { border-color: var(--accent-border); }
+    .pg-output.has-content { border-color: hsl(240 5% 26%); }
 
     .pg-output-prompt {
       font-family: 'Geist Mono', monospace;
       font-size: 14px;
       line-height: 1.8;
       word-break: break-word;
-      color: var(--ds-gray-1000);
+      color: var(--foreground);
       min-height: 28px;
       padding-right: 90px;
-
     }
 
     .pg-output-flags {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      color: var(--ds-gray-800);
+      color: var(--muted-foreground);
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid var(--ds-gray-300);
+      border-top: 1px solid var(--border);
       word-break: break-all;
     }
 
@@ -359,28 +344,27 @@
       position: absolute;
       top: 14px;
       right: 14px;
-      background: var(--ds-gray-200);
+      background: var(--secondary);
       border: 1px solid var(--border);
-      color: var(--ds-gray-900);
+      color: var(--foreground);
       font-family: 'Geist', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      padding: 5px 14px;
-      border-radius: var(--radius-sm);
+      padding: 6px 14px;
+      border-radius: calc(var(--radius) - 2px);
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s ease;
     }
 
     .pg-copy:hover {
-      background: var(--ds-gray-300);
-      border-color: var(--border-hover);
-      color: var(--ds-gray-1000);
+      background: hsl(240 3.7% 20%);
+      border-color: hsl(240 5% 26%);
     }
 
     .pg-copy.ok {
-      background: var(--accent-subtle);
-      border-color: var(--accent-border);
-      color: var(--accent);
+      background: hsl(142 71% 45% / 0.12);
+      border-color: hsl(142 71% 45% / 0.3);
+      color: hsl(142 71% 45%);
     }
 
     /* ════════════════════════════════════════
@@ -400,11 +384,14 @@
       gap: 12px;
     }
 
-    /* slot card */
+    @media (max-width: 600px) {
+      .pg-slots { grid-template-columns: 1fr; }
+    }
+
     .pg-slot {
-      background: var(--surface);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius);
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -413,11 +400,10 @@
     }
 
     .pg-slot.locked {
-      border-color: var(--accent-border);
-      background: var(--accent-subtle);
+      border-color: hsl(240 5% 26%);
+      background: hsl(240 3.7% 15.9% / 0.5);
     }
 
-    /* slot header row */
     .slot-header {
       display: flex;
       align-items: center;
@@ -438,56 +424,59 @@
     }
 
     .pg-slot-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted-foreground);
     }
 
-    /* Geist-style select */
+    /* shadcn select */
     .slot-select {
       width: 100%;
-      background: var(--ds-gray-100);
-      border: 1px solid var(--ds-gray-400);
-      color: var(--text-primary);
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      color: var(--foreground);
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      padding: 8px 32px 8px 10px;
-      border-radius: var(--radius-sm);
+      padding: 8px 32px 8px 12px;
+      border-radius: calc(var(--radius) - 2px);
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 10px center;
-      transition: border-color 0.1s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
       line-height: 1.4;
     }
 
-    .slot-select:hover { border-color: var(--border-hover); }
-    .slot-select:focus { outline: none; border-color: var(--ds-gray-700); }
+    .slot-select:hover { border-color: hsl(240 5% 34%); }
+    .slot-select:focus {
+      outline: none;
+      border-color: var(--ring);
+      box-shadow: 0 0 0 2px hsl(240 4.9% 83.9% / 0.15);
+    }
     .slot-select:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    /* Geist-style text input */
+    /* shadcn input */
     .slot-input {
       width: 100%;
-      background: var(--ds-gray-100);
-      border: 1px solid var(--ds-gray-400);
-      color: var(--text-primary);
+      background: var(--secondary);
+      border: 1px solid var(--border);
+      color: var(--foreground);
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      padding: 8px 10px;
-      border-radius: var(--radius-sm);
-      transition: border-color 0.1s ease;
+      padding: 8px 12px;
+      border-radius: calc(var(--radius) - 2px);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .slot-input::placeholder { color: var(--ds-gray-500); }
-    .slot-input:hover { border-color: var(--border-hover); }
+    .slot-input::placeholder { color: var(--muted-foreground); }
+    .slot-input:hover { border-color: hsl(240 5% 34%); }
 
     .slot-input:focus {
       outline: none;
-      border-color: var(--ds-gray-700);
+      border-color: var(--ring);
+      box-shadow: 0 0 0 2px hsl(240 4.9% 83.9% / 0.15);
     }
 
     .slot-input:disabled { opacity: 0.35; cursor: not-allowed; }
@@ -501,34 +490,33 @@
     .pg-sbtn {
       flex: 1;
       background: transparent;
-      border: 1px solid var(--ds-gray-400);
-      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
       font-family: 'Geist', sans-serif;
       font-size: 11px;
       font-weight: 500;
       padding: 7px 8px;
-      border-radius: var(--radius-sm);
+      border-radius: calc(var(--radius) - 2px);
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s ease;
       text-align: center;
       white-space: nowrap;
     }
 
     .pg-sbtn:hover:not(:disabled) {
-      background: var(--ds-gray-200);
-      border-color: var(--border-hover);
-      color: var(--ds-gray-1000);
+      background: var(--secondary);
+      border-color: hsl(240 5% 26%);
+      color: var(--foreground);
     }
 
     .pg-sbtn.on {
-      background: var(--accent-subtle);
-      border-color: var(--accent-border);
-      color: var(--accent-dim);
+      background: var(--foreground);
+      border-color: var(--foreground);
+      color: var(--background);
     }
 
     .pg-sbtn.on:hover {
-      color: var(--accent);
-      background: rgba(0,255,224,0.1);
+      background: hsl(0 0% 85%);
     }
 
     .pg-sbtn.reroll {
@@ -549,39 +537,39 @@
 
     .pg-gen {
       flex: 1;
-      background: var(--ds-gray-200);
-      border: 1px solid var(--ds-gray-500);
-      color: var(--ds-gray-900);
+      background: var(--foreground);
+      border: 1px solid var(--foreground);
+      color: var(--background);
       font-family: 'Geist', sans-serif;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: -0.01em;
       padding: 12px 0;
-      border-radius: var(--radius-md);
+      border-radius: calc(var(--radius) - 2px);
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s ease;
     }
 
-    .pg-gen:hover { background: var(--ds-gray-300); border-color: var(--ds-gray-600); color: var(--ds-gray-1000); }
-    .pg-gen:active { transform: scale(0.997); background: var(--ds-gray-400); }
+    .pg-gen:hover { background: hsl(0 0% 85%); border-color: hsl(0 0% 85%); }
+    .pg-gen:active { transform: scale(0.997); }
 
     .pg-rst {
       background: transparent;
-      border: 1px solid var(--red-border);
-      color: var(--red-dim);
+      border: 1px solid var(--border);
+      color: var(--muted-foreground);
       font-family: 'Geist', sans-serif;
       font-size: 13px;
       font-weight: 500;
       padding: 12px 24px;
-      border-radius: var(--radius-md);
+      border-radius: calc(var(--radius) - 2px);
       cursor: pointer;
-      transition: all 0.1s ease;
+      transition: all 0.15s ease;
     }
 
     .pg-rst:hover {
-      background: var(--red-subtle);
-      border-color: var(--red);
-      color: var(--red);
+      background: var(--destructive);
+      border-color: var(--destructive);
+      color: var(--destructive-foreground);
     }
 
     /* ════════════════════════════════════════
@@ -597,35 +585,33 @@
     }
 
     .pg-hist-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted-foreground);
     }
 
     .hist-hint {
       font-size: 11px;
-      color: var(--ds-gray-700);
+      color: var(--muted-foreground);
     }
 
     .pg-hist-item {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--muted-foreground);
       padding: 12px 16px;
-      border: 1px solid var(--ds-gray-300);
-      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) - 2px);
       margin-bottom: 6px;
       cursor: pointer;
       line-height: 1.65;
-      transition: all 0.1s ease;
+      transition: all 0.15s ease;
     }
 
     .pg-hist-item:hover {
-      border-color: var(--border-hover);
-      color: var(--ds-gray-1000);
-      background: var(--ds-gray-100);
+      border-color: hsl(240 5% 26%);
+      color: var(--foreground);
+      background: var(--secondary);
     }
 
     /* ── Token colors ── */
@@ -644,10 +630,9 @@
       justify-content: space-between;
       margin-top: 0;
       padding: 10px 16px;
-      background: var(--ds-gray-100);
+      background: var(--secondary);
       border: 1px solid var(--border);
-      border-top: 1px solid var(--ds-gray-300);
-      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      border-radius: 0 0 var(--radius) var(--radius);
     }
 
     .output-footer-label {
@@ -656,27 +641,20 @@
       gap: 10px;
       font-size: 12px;
       font-weight: 500;
-      color: var(--text-secondary);
+      color: var(--muted-foreground);
       cursor: pointer;
       user-select: none;
     }
 
-    .output-footer-label:hover { color: var(--text-primary); }
-
-    /* connect output card to footer */
-    .pg-output {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border-bottom: none;
-    }
+    .output-footer-label:hover { color: var(--foreground); }
 
     .output-footer-hint {
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
-      color: var(--ds-gray-700);
+      color: var(--muted-foreground);
     }
 
-    /* ── Discrete sticky copy pill ── */
+    /* ── Sticky copy pill ── */
     .sticky-copy {
       position: fixed;
       bottom: 28px;
@@ -688,13 +666,13 @@
       font-family: 'Geist', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      color: var(--ds-gray-700);
-      background: var(--ds-gray-100);
-      border: 1px solid var(--ds-gray-400);
+      color: var(--muted-foreground);
+      background: var(--card);
+      border: 1px solid var(--border);
       border-radius: 999px;
       padding: 7px 14px 7px 11px;
       cursor: pointer;
-      transition: color 0.12s ease, border-color 0.12s ease, background 0.12s ease, opacity 0.25s ease;
+      transition: all 0.2s ease;
       opacity: 0;
       pointer-events: none;
     }
@@ -705,15 +683,15 @@
     }
 
     .sticky-copy:hover {
-      color: var(--ds-gray-900);
-      border-color: var(--ds-gray-600);
-      background: var(--ds-gray-200);
+      color: var(--foreground);
+      border-color: hsl(240 5% 26%);
+      background: var(--secondary);
     }
 
     .sticky-copy.ok {
-      color: var(--accent);
-      border-color: var(--accent-border);
-      background: var(--accent-subtle);
+      color: hsl(142 71% 45%);
+      border-color: hsl(142 71% 45% / 0.3);
+      background: hsl(142 71% 45% / 0.1);
     }
 
     @media (max-width: 768px) {
@@ -798,7 +776,7 @@
     <div id="pg-hist-list"></div>
   </div>
 
-  <!-- ── Discrete sticky copy pill ── -->
+  <!-- ── Sticky copy pill ── -->
   <button class="sticky-copy" id="sticky-copy" aria-label="Copy prompt">
     <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
@@ -899,7 +877,6 @@ function rFlags() {
       flagValues[inp.dataset.flagVal] = inp.value.trim();
       rOutput();
     };
-    // select all on focus for quick editing
     inp.onfocus = () => inp.select();
   });
 }
@@ -908,7 +885,6 @@ function rFlags() {
    RENDER OUTPUT
 ═══════════════════════════════════════════════════ */
 function rOutput() {
-  // colored prompt tokens
   const html = [
     `<span class="cs">${val('subject')}</span>`,
     `<span class="cg">${val('genre')}</span>`,
@@ -974,7 +950,6 @@ function rSlots() {
     </div>`;
   }).join('');
 
-  // select change → update slot value + output
   document.querySelectorAll('[data-select]').forEach(el => {
     el.onchange = () => {
       const k = el.dataset.select;
@@ -982,7 +957,6 @@ function rSlots() {
     };
   });
 
-  // custom input → override
   document.querySelectorAll('[data-input]').forEach(el => {
     el.oninput = () => {
       const k = el.dataset.input;
@@ -991,7 +965,6 @@ function rSlots() {
     };
   });
 
-  // lock toggle
   document.querySelectorAll('[data-lock]').forEach(b => {
     b.onclick = () => {
       const k = b.dataset.lock;
@@ -1000,7 +973,6 @@ function rSlots() {
     };
   });
 
-  // reroll
   document.querySelectorAll('[data-reroll]').forEach(b => {
     b.onclick = () => {
       const k = b.dataset.reroll;
@@ -1059,7 +1031,6 @@ document.getElementById('flags-toggle').onchange = function() {
   rOutput();
 };
 
-// Discrete sticky copy pill — appears when output panel scrolls out of view
 const stickyPill = document.getElementById('sticky-copy');
 
 const pillObserver = new IntersectionObserver(
@@ -1075,7 +1046,6 @@ stickyPill.onclick = function() {
   });
 };
 
-// Flags collapse toggle
 let flagsCollapsed = false;
 document.getElementById('flags-header').onclick = () => {
   flagsCollapsed = !flagsCollapsed;
