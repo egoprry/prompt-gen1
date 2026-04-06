@@ -10,42 +10,36 @@
   <style>
     /* ── Geist Design System – Dark Mode Tokens ── */
     :root {
-      /* Backgrounds */
-      --ds-bg-100: #000000;
-      --ds-bg-200: #0a0a0a;
-
-      /* Gray Scale */
-      --ds-gray-100: #141414;
-      --ds-gray-200: #1e1e1e;
-      --ds-gray-300: #2a2a2a;
-      --ds-gray-400: #383838;
-      --ds-gray-500: #505050;
-      --ds-gray-600: #707070;
-      --ds-gray-700: #999999;
-      --ds-gray-800: #c0c0c0;
-      --ds-gray-900: #eeeeee;
+      --ds-bg-100:    #000000;
+      --ds-bg-200:    #0a0a0a;
+      --ds-gray-100:  #111111;
+      --ds-gray-200:  #1a1a1a;
+      --ds-gray-300:  #262626;
+      --ds-gray-400:  #363636;
+      --ds-gray-500:  #4a4a4a;
+      --ds-gray-600:  #787878;
+      --ds-gray-700:  #a8a8a8;
+      --ds-gray-800:  #b4b4b4;
+      --ds-gray-900:  #e8e8e8;
       --ds-gray-1000: #ffffff;
 
-      /* WANGHAF brand accent */
       --accent:        #00ffe0;
-      --accent-subtle: rgba(0, 255, 224, 0.08);
-      --accent-border: rgba(0, 255, 224, 0.30);
-      --accent-dim:    rgba(0, 255, 224, 0.65);
+      --accent-subtle: rgba(0,255,224,0.07);
+      --accent-border: rgba(0,255,224,0.28);
+      --accent-dim:    rgba(0,255,224,0.60);
 
-      /* Destructive */
-      --red:           #ff5555;
-      --red-subtle:    rgba(255, 85, 85, 0.09);
-      --red-border:    rgba(255, 85, 85, 0.35);
-      --red-dim:       rgba(255, 85, 85, 0.65);
+      --red:        #ff5555;
+      --red-subtle: rgba(255,85,85,0.08);
+      --red-border: rgba(255,85,85,0.32);
+      --red-dim:    rgba(255,85,85,0.60);
 
-      /* Semantic aliases */
-      --border:        var(--ds-gray-400);
-      --border-hover:  var(--ds-gray-600);
-      --surface:       #0e0e0e;
-      --surface-raised:var(--ds-gray-200);
-      --text-primary:  var(--ds-gray-1000);
-      --text-secondary:var(--ds-gray-800);
-      --text-tertiary: var(--ds-gray-700);
+      --border:       var(--ds-gray-400);
+      --border-hover: var(--ds-gray-600);
+      --surface:      #0d0d0d;
+
+      --text-primary:   var(--ds-gray-1000);
+      --text-secondary: var(--ds-gray-800);
+      --text-tertiary:  var(--ds-gray-700);
 
       /* Prompt token colors */
       --c-subject:   #00ffe0;
@@ -54,180 +48,327 @@
       --c-echo:      #6ee7b7;
       --c-directive: #93c5fd;
       --c-era:       #c4b5fd;
+      --c-framing:   #fbbf24;
 
-      /* Spacing rhythm */
-      --r-xs: 4px;
-      --r-sm: 8px;
-      --r-md: 16px;
-      --r-lg: 24px;
-      --r-xl: 32px;
-
-      /* Radii */
       --radius-sm: 5px;
-      --radius-md: 7px;
-      --radius-lg: 10px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--ds-bg-100);
-      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text-primary);
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
     }
 
-    /* ────────────────────────────────────────
-       Layout
-    ──────────────────────────────────────── */
+    /* ── Layout ── */
     #pgr {
-      max-width: 760px;
+      width: 90%;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 56px 0 100px;
     }
 
-    /* ────────────────────────────────────────
-       Header
-    ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      #pgr { width: 100%; padding: 32px 20px 80px; }
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════ */
     .pg-header {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      padding-bottom: var(--r-lg);
+      padding-bottom: 28px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: var(--r-xl);
+      margin-bottom: 48px;
     }
 
     .pg-eyebrow {
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
-      font-weight: 400;
       letter-spacing: 0.08em;
-      color: var(--ds-gray-800);
+      color: var(--text-tertiary);
       text-transform: uppercase;
-      margin-bottom: var(--r-sm);
+      margin-bottom: 10px;
     }
 
     .pg-title {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 700;
-      letter-spacing: -0.025em;
-      color: var(--text-primary);
+      letter-spacing: -0.03em;
       line-height: 1;
     }
 
-    .pg-title-accent {
-      color: var(--accent);
-    }
+    .pg-title-accent { color: var(--accent); }
 
-    /* right-side status cluster */
     .pg-meta {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 6px;
+      gap: 8px;
     }
 
-    /* Geist-style badge / pill */
     .pg-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.04em;
       color: var(--ds-gray-900);
       background: var(--ds-gray-200);
       border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 999px; /* pill */
+      padding: 5px 12px;
+      border-radius: 999px;
     }
 
     .pg-dot {
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 5px var(--accent);
+      box-shadow: 0 0 6px var(--accent);
       flex-shrink: 0;
       animation: pulse 2.4s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.2; }
+      0%,100% { opacity:1; } 50% { opacity:0.15; }
     }
 
     .pg-meta-row {
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
-      color: var(--ds-gray-800);
+      color: var(--text-secondary);
       letter-spacing: 0.04em;
     }
 
-    /* ────────────────────────────────────────
-       Output Panel
-    ──────────────────────────────────────── */
-    .pg-output-wrap {
-      margin-bottom: var(--r-md);
+    /* ════════════════════════════════════════
+       FLAGS SECTION
+    ════════════════════════════════════════ */
+    .flags-section {
+      margin-bottom: 48px;
+    }
+
+    .flags-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .flags-section-header:hover .section-label { color: var(--text-secondary); }
+
+    .flags-chevron {
+      display: flex;
+      align-items: center;
+      color: var(--ds-gray-600);
+      transition: transform 0.2s ease, color 0.1s ease;
+    }
+
+    .flags-section-header:hover .flags-chevron { color: var(--text-secondary); }
+
+    .flags-chevron.collapsed { transform: rotate(-90deg); }
+
+    .flags-body {
+      overflow: hidden;
+      transition: opacity 0.2s ease;
+    }
+
+    .flags-body.collapsed {
+      display: none;
+    }
+
+    .flags-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .flag-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--ds-gray-300);
+      transition: background 0.1s ease;
+    }
+
+    .flag-row:last-child { border-bottom: none; }
+    .flag-row:hover { background: var(--ds-gray-100); }
+
+    .flag-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .flag-name {
+      font-family: 'Geist Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .flag-row.disabled .flag-name { color: var(--text-tertiary); }
+
+    .flag-value-input {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--ds-gray-200);
+      border: 1px solid var(--ds-gray-400);
+      border-radius: var(--radius-sm);
+      padding: 3px 8px;
+      width: 68px;
+      text-align: center;
+      transition: border-color 0.1s ease, background 0.1s ease;
+    }
+
+    .flag-value-input:hover { border-color: var(--border-hover); }
+    .flag-value-input:focus {
+      outline: none;
+      border-color: var(--ds-gray-700);
+      background: var(--ds-gray-300);
+    }
+    .flag-row.disabled .flag-value-input { opacity: 0.35; }
+
+    .flag-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    /* Geist toggle switch */
+    .toggle {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: var(--ds-gray-400);
+      transition: background 0.15s ease;
+      cursor: pointer;
+    }
+
+    .toggle input:checked + .toggle-track {
+      background: var(--ds-gray-1000);
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--ds-gray-800);
+      top: 3px;
+      left: 3px;
+      transition: transform 0.15s ease, background 0.15s ease;
+      pointer-events: none;
+    }
+
+    .toggle input:checked ~ .toggle-thumb {
+      transform: translateX(16px);
+      background: var(--ds-bg-100);
+    }
+
+    /* ════════════════════════════════════════
+       OUTPUT PANEL
+    ════════════════════════════════════════ */
+    .output-section {
+      margin-bottom: 48px;
+    }
+
+    .output-section .section-label {
+      margin-bottom: 16px;
     }
 
     .pg-output {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: 16px 20px;
+      padding: 20px 24px;
       position: relative;
-      min-height: 90px;
+      min-height: 100px;
       transition: border-color 0.15s ease;
     }
 
-    .pg-output.has-content {
-      border-color: var(--accent-border);
-    }
+    .pg-output.has-content { border-color: var(--accent-border); }
 
-    .pg-output-label {
-      font-family: 'Geist Mono', monospace;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      color: var(--ds-gray-800);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .pg-output-text {
+    .pg-output-prompt {
       font-family: 'Geist Mono', monospace;
       font-size: 14px;
-      line-height: 1.75;
+      line-height: 1.8;
       word-break: break-word;
       color: var(--ds-gray-1000);
-      min-height: 24px;
+      min-height: 28px;
+      padding-right: 90px;
+
     }
 
-    /* Geist-style ghost button */
+    .pg-output-flags {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      color: var(--ds-gray-800);
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--ds-gray-300);
+      word-break: break-all;
+    }
+
     .pg-copy {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 14px;
+      right: 14px;
       background: var(--ds-gray-200);
       border: 1px solid var(--border);
       color: var(--ds-gray-900);
       font-family: 'Geist', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: all 0.1s ease;
-      white-space: nowrap;
     }
 
     .pg-copy:hover {
@@ -242,22 +383,32 @@
       color: var(--accent);
     }
 
-    /* ────────────────────────────────────────
-       Slot Grid
-    ──────────────────────────────────────── */
-    .pg-slots {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--r-sm);
-      margin-bottom: var(--r-md);
+    /* ════════════════════════════════════════
+       SLOT GRID
+    ════════════════════════════════════════ */
+    .slots-section {
+      margin-bottom: 40px;
     }
 
-    /* Geist "entity" card style */
+    .slots-section .section-label {
+      margin-bottom: 16px;
+    }
+
+    .pg-slots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* slot card */
     .pg-slot {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       transition: border-color 0.12s ease;
     }
 
@@ -266,42 +417,96 @@
       background: var(--accent-subtle);
     }
 
-    .pg-slot-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      color: var(--ds-gray-800);
-      text-transform: uppercase;
-      margin-bottom: 6px;
+    /* slot header row */
+    .slot-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .pg-slot-value {
+    .slot-label-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slot-color-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pg-slot-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    /* Geist-style select */
+    .slot-select {
+      width: 100%;
+      background: var(--ds-gray-100);
+      border: 1px solid var(--ds-gray-400);
+      color: var(--text-primary);
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      font-weight: 500;
+      padding: 8px 32px 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: border-color 0.1s ease;
       line-height: 1.4;
-      margin-bottom: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      opacity: 1;
     }
 
-    .pg-slot-actions {
+    .slot-select:hover { border-color: var(--border-hover); }
+    .slot-select:focus { outline: none; border-color: var(--ds-gray-700); }
+    .slot-select:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Geist-style text input */
+    .slot-input {
+      width: 100%;
+      background: var(--ds-gray-100);
+      border: 1px solid var(--ds-gray-400);
+      color: var(--text-primary);
+      font-family: 'Geist Mono', monospace;
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      transition: border-color 0.1s ease;
+    }
+
+    .slot-input::placeholder { color: var(--ds-gray-500); }
+    .slot-input:hover { border-color: var(--border-hover); }
+
+    .slot-input:focus {
+      outline: none;
+      border-color: var(--ds-gray-700);
+    }
+
+    .slot-input:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* action row */
+    .slot-actions {
       display: flex;
-      gap: 5px;
+      gap: 6px;
     }
 
-    /* Geist secondary button – small */
     .pg-sbtn {
       flex: 1;
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--ds-gray-800);
+      border: 1px solid var(--ds-gray-400);
+      color: var(--text-secondary);
       font-family: 'Geist', sans-serif;
       font-size: 11px;
       font-weight: 500;
-      padding: 5px 6px;
+      padding: 7px 8px;
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: all 0.1s ease;
@@ -312,7 +517,7 @@
     .pg-sbtn:hover:not(:disabled) {
       background: var(--ds-gray-200);
       border-color: var(--border-hover);
-      color: var(--text-primary);
+      color: var(--ds-gray-1000);
     }
 
     .pg-sbtn.on {
@@ -322,51 +527,44 @@
     }
 
     .pg-sbtn.on:hover {
-      background: rgba(0, 255, 224, 0.1);
       color: var(--accent);
+      background: rgba(0,255,224,0.1);
     }
 
-    .pg-sbtn:disabled {
-      opacity: 0.2;
-      cursor: not-allowed;
+    .pg-sbtn.reroll {
+      flex: 0 0 auto;
+      padding: 7px 12px;
     }
 
-    /* ────────────────────────────────────────
-       Actions
-    ──────────────────────────────────────── */
+    .pg-sbtn:disabled { opacity: 0.22; cursor: not-allowed; }
+
+    /* ════════════════════════════════════════
+       ACTIONS
+    ════════════════════════════════════════ */
     .pg-actions {
       display: flex;
-      gap: var(--r-sm);
-      margin-bottom: var(--r-xl);
+      gap: 10px;
+      margin-bottom: 56px;
     }
 
-    /* Geist primary button – white fill */
     .pg-gen {
       flex: 1;
-      background: var(--ds-gray-1000);
-      border: 1px solid var(--ds-gray-1000);
-      color: var(--ds-bg-100);
+      background: var(--ds-gray-200);
+      border: 1px solid var(--ds-gray-500);
+      color: var(--ds-gray-900);
       font-family: 'Geist', sans-serif;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: -0.01em;
-      padding: 10px 0;
+      padding: 12px 0;
       border-radius: var(--radius-md);
       cursor: pointer;
-      transition: background 0.12s ease, border-color 0.12s ease;
+      transition: all 0.1s ease;
     }
 
-    .pg-gen:hover {
-      background: var(--ds-gray-900);
-      border-color: var(--ds-gray-900);
-    }
+    .pg-gen:hover { background: var(--ds-gray-300); border-color: var(--ds-gray-600); color: var(--ds-gray-1000); }
+    .pg-gen:active { transform: scale(0.997); background: var(--ds-gray-400); }
 
-    .pg-gen:active {
-      transform: scale(0.995);
-      background: var(--ds-gray-800);
-    }
-
-    /* Geist secondary destructive button */
     .pg-rst {
       background: transparent;
       border: 1px solid var(--red-border);
@@ -374,10 +572,10 @@
       font-family: 'Geist', sans-serif;
       font-size: 13px;
       font-weight: 500;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: var(--radius-md);
       cursor: pointer;
-      transition: all 0.12s ease;
+      transition: all 0.1s ease;
     }
 
     .pg-rst:hover {
@@ -386,195 +584,504 @@
       color: var(--red);
     }
 
-    /* ────────────────────────────────────────
-       History
-    ──────────────────────────────────────── */
-    .pg-hist-header {
+    /* ════════════════════════════════════════
+       HISTORY
+    ════════════════════════════════════════ */
+    .hist-section { }
+
+    .hist-header {
       display: flex;
       align-items: center;
-      gap: var(--r-sm);
-      margin-bottom: var(--r-md);
-    }
-
-    .pg-hist-divider {
-      height: 1px;
-      background: var(--border);
-      margin-bottom: var(--r-lg);
+      justify-content: space-between;
+      margin-bottom: 16px;
     }
 
     .pg-hist-label {
       font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--ds-gray-800);
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
       text-transform: uppercase;
     }
 
-    /* Geist table-row style */
+    .hist-hint {
+      font-size: 11px;
+      color: var(--ds-gray-700);
+    }
+
     .pg-hist-item {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      color: var(--ds-gray-800);
-      padding: 10px 14px;
+      color: var(--text-secondary);
+      padding: 12px 16px;
       border: 1px solid var(--ds-gray-300);
       border-radius: var(--radius-md);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
       cursor: pointer;
-      line-height: 1.6;
+      line-height: 1.65;
       transition: all 0.1s ease;
     }
 
     .pg-hist-item:hover {
       border-color: var(--border-hover);
       color: var(--ds-gray-1000);
-      background: var(--ds-gray-200);
+      background: var(--ds-gray-100);
     }
 
-    /* ────────────────────────────────────────
-       Prompt Token Colors
-    ──────────────────────────────────────── */
+    /* ── Token colors ── */
     .cs { color: var(--c-subject); }
     .cg { color: var(--c-genre); }
     .cp { color: var(--c-prop); }
     .ce { color: var(--c-echo); }
     .cd { color: var(--c-directive); }
     .cr { color: var(--c-era); }
+    .cf { color: var(--c-framing); }
+
+    /* ── Output footer toggle ── */
+    .output-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0;
+      padding: 10px 16px;
+      background: var(--ds-gray-100);
+      border: 1px solid var(--border);
+      border-top: 1px solid var(--ds-gray-300);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    .output-footer-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .output-footer-label:hover { color: var(--text-primary); }
+
+    /* connect output card to footer */
+    .pg-output {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
+    }
+
+    .output-footer-hint {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--ds-gray-700);
+    }
+
+    /* ── Discrete sticky copy pill ── */
+    .sticky-copy {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Geist', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ds-gray-700);
+      background: var(--ds-gray-100);
+      border: 1px solid var(--ds-gray-400);
+      border-radius: 999px;
+      padding: 7px 14px 7px 11px;
+      cursor: pointer;
+      transition: color 0.12s ease, border-color 0.12s ease, background 0.12s ease, opacity 0.25s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sticky-copy.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .sticky-copy:hover {
+      color: var(--ds-gray-900);
+      border-color: var(--ds-gray-600);
+      background: var(--ds-gray-200);
+    }
+
+    .sticky-copy.ok {
+      color: var(--accent);
+      border-color: var(--accent-border);
+      background: var(--accent-subtle);
+    }
+
+    @media (max-width: 768px) {
+      .sticky-copy { bottom: 20px; right: 16px; }
+    }
   </style>
 </head>
 
 <body>
-  <div id="pgr">
+<div id="pgr">
 
-    <!-- Header -->
-    <div class="pg-header">
-      <div>
-        <div class="pg-eyebrow">WANGHAF // Midjourney Formula Engine</div>
-        <div class="pg-title">Prompt <span class="pg-title-accent">Gen</span></div>
+  <!-- ── HEADER ── -->
+  <div class="pg-header">
+    <div>
+      <div class="pg-eyebrow">WANGHAF // Midjourney Formula Engine</div>
+      <div class="pg-title">Prompt <span class="pg-title-accent">Gen</span></div>
+    </div>
+    <div class="pg-meta">
+      <div class="pg-badge">
+        <span class="pg-dot"></span>System Online
       </div>
-      <div class="pg-meta">
-        <div class="pg-badge">
-          <span class="pg-dot"></span>
-          System Online
-        </div>
-        <div class="pg-meta-row">MJ V7 · Formula Mode</div>
-        <div class="pg-meta-row" id="pg-counter">Output: 000</div>
-      </div>
+      <div class="pg-meta-row">MJ V7 · Formula Mode</div>
+      <div class="pg-meta-row" id="pg-counter">Output: 000</div>
     </div>
-
-    <!-- Output Panel -->
-    <div class="pg-output-wrap">
-      <div class="pg-output" id="pg-output">
-        <div class="pg-output-label">Output Prompt</div>
-        <div class="pg-output-text" id="pg-text"></div>
-        <button class="pg-copy" id="pg-copy">Copy</button>
-      </div>
-    </div>
-
-    <!-- Slot Grid -->
-    <div class="pg-slots" id="pg-slots"></div>
-
-    <!-- Actions -->
-    <div class="pg-actions">
-      <button class="pg-gen" id="pg-gen">↺ Generate</button>
-      <button class="pg-rst" id="pg-rst">Reset</button>
-    </div>
-
-    <!-- History -->
-    <div id="pg-hist-wrap" style="display:none;">
-      <div class="pg-hist-divider"></div>
-      <div class="pg-hist-label">Recent Outputs — click to copy</div>
-      <div style="height:12px;"></div>
-      <div id="pg-hist-list"></div>
-    </div>
-
   </div>
 
-  <script>
-    const V = {
-      subject: ["Man", "Woman", "Figure", "Child", "Crowd", "Twins", "Soldier", "Elder", "Warrior", "Priest", "Prophet", "Body", "Ghost", "Machine", "Stranger"],
-      genre: ["horror transhumanism", "horror biomechanics", "horror parasitism", "horror entropy", "horror surveillance", "horror liminality", "horror urbanism", "horror somnambulism", "horror cartography", "horror body modification", "mythology dissolution", "mythology exile", "divinity collapse", "theology erosion", "shamanism ascent", "ecology collapse", "symbiosis inversion", "flora possession", "fauna merger", "terrain absorption", "authority corruption", "hierarchy collapse", "ideology fracture", "institution decay", "resistance emergence", "obsession spiral", "memory erosion", "grief architecture", "paranoia geometry", "ego dissolution", "violence economy", "loyalty collapse", "ritual punishment", "predation elegance", "underworld ascent"],
-      prop: ["clock", "spine", "mirror", "candle", "wire", "eye", "mouth", "thread", "photograph", "knife", "crown", "flag", "uniform", "coin", "scar", "root", "spore", "feather", "stone", "seal", "bone", "gear", "circuit", "glass", "silk", "needle", "door", "altar", "map", "relic"],
-      echo: ["time", "architecture", "ritual decay", "threshold", "signal loss", "nerve", "void", "absence", "repetition", "distance", "angle", "face", "transaction", "oath", "code", "crossing", "age", "vision", "silence", "faith", "spread", "instinct", "weight", "decree", "mass", "border", "rule", "fist", "wall", "erasure", "descent", "hunger", "pressure"],
-      directive: ["high-contrast", "overexposed blown-out", "underlit shadow-heavy", "grainy low-resolution", "flat graphic two-tone", "heavily textured gritty", "high-grain", "low-key editorial", "monochrome", "duotone", "overexposed washed", "clinical sharp", "halftone degraded", "deep chiaroscuro", "bleached archival"],
-      era: ["2000s aesthetic", "90s industrial aesthetic", "80s sci-fi aesthetic", "70s exploitation aesthetic", "70s cinema verité aesthetic", "art deco aesthetic", "Cold War propaganda aesthetic", "Byzantine aesthetic", "Roman fresco aesthetic", "medieval manuscript aesthetic", "Victorian naturalist aesthetic", "Weimar expressionist aesthetic", "Soviet propaganda aesthetic", "constructivist poster aesthetic", "Hitchcock noir aesthetic", "neo-noir aesthetic", "outsider art aesthetic", "darkroom aesthetic", "slow cinema aesthetic", "technical drawing aesthetic", "experimental theater aesthetic", "brutalist noir aesthetic", "brutalist aesthetic", "90s zine aesthetic", "millennium aesthetic"]
+  <!-- ── FLAGS ── -->
+  <div class="flags-section">
+    <div class="flags-section-header" id="flags-header">
+      <span class="section-label" style="margin-bottom:0;">Parameter Flags</span>
+      <span class="flags-chevron" id="flags-chevron">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+    <div class="flags-body" id="flags-body">
+      <div class="flags-card" id="flags-card"></div>
+    </div>
+  </div>
+
+  <!-- ── OUTPUT ── -->
+  <div class="output-section">
+    <div class="section-label">Output Prompt</div>
+    <div class="pg-output" id="pg-output">
+      <div class="pg-output-prompt" id="pg-text"></div>
+      <div class="pg-output-flags" id="pg-flags-text" style="display:none;"></div>
+      <button class="pg-copy" id="pg-copy">Copy</button>
+    </div>
+    <div class="output-footer">
+      <label class="output-footer-label" for="flags-toggle">
+        <label class="toggle" style="width:32px;height:18px;">
+          <input type="checkbox" id="flags-toggle" checked>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb" style="width:12px;height:12px;top:3px;left:3px;"></div>
+        </label>
+        Append parameter flags to output
+      </label>
+      <span class="output-footer-hint">copies what you see</span>
+    </div>
+  </div>
+
+  <!-- ── SLOTS ── -->
+  <div class="slots-section">
+    <div class="section-label">Formula Slots</div>
+    <div class="pg-slots" id="pg-slots"></div>
+  </div>
+
+  <!-- ── ACTIONS ── -->
+  <div class="pg-actions">
+    <button class="pg-gen" id="pg-gen">↺ &nbsp;Generate</button>
+    <button class="pg-rst" id="pg-rst">Reset</button>
+  </div>
+
+  <!-- ── HISTORY ── -->
+  <div id="pg-hist-wrap" style="display:none;">
+    <div class="divider" style="margin-bottom:32px;"></div>
+    <div class="hist-header">
+      <div class="pg-hist-label">Recent Outputs</div>
+      <div class="hist-hint">Click any entry to copy</div>
+    </div>
+    <div id="pg-hist-list"></div>
+  </div>
+
+  <!-- ── Discrete sticky copy pill ── -->
+  <button class="sticky-copy" id="sticky-copy" aria-label="Copy prompt">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2H3.5A1.5 1.5 0 0 0 2 3.5V9.5A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Copy
+  </button>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════════ */
+const V = {
+  subject: ["Man","Woman","Figure","Child","Crowd","Twins","Soldier","Elder","Warrior","Priest","Prophet","Body","Ghost","Machine","Stranger"],
+  genre: ["horror transhumanism","horror biomechanics","horror parasitism","horror entropy","horror surveillance","horror liminality","horror urbanism","horror somnambulism","horror cartography","horror body modification","mythology dissolution","mythology exile","divinity collapse","theology erosion","shamanism ascent","ecology collapse","symbiosis inversion","flora possession","fauna merger","terrain absorption","authority corruption","hierarchy collapse","ideology fracture","institution decay","resistance emergence","obsession spiral","memory erosion","grief architecture","paranoia geometry","ego dissolution","violence economy","loyalty collapse","ritual punishment","predation elegance","underworld ascent"],
+  prop: ["clock","spine","mirror","candle","wire","eye","mouth","thread","photograph","knife","crown","flag","uniform","coin","scar","root","spore","feather","stone","seal","bone","gear","circuit","glass","silk","needle","door","altar","map","relic"],
+  echo: ["time","architecture","ritual decay","threshold","signal loss","nerve","void","absence","repetition","distance","angle","face","transaction","oath","code","crossing","age","vision","silence","faith","spread","instinct","weight","decree","mass","border","rule","fist","wall","erasure","descent","hunger","pressure"],
+  directive: ["high-contrast","overexposed blown-out","underlit shadow-heavy","grainy low-resolution","flat graphic two-tone","heavily textured gritty","high-grain","low-key editorial","monochrome","duotone","overexposed washed","clinical sharp","halftone degraded","deep chiaroscuro","bleached archival"],
+  era: ["2000s aesthetic","90s industrial aesthetic","80s sci-fi aesthetic","70s exploitation aesthetic","70s cinema verité aesthetic","art deco aesthetic","Cold War propaganda aesthetic","Byzantine aesthetic","Roman fresco aesthetic","medieval manuscript aesthetic","Victorian naturalist aesthetic","Weimar expressionist aesthetic","Soviet propaganda aesthetic","constructivist poster aesthetic","Hitchcock noir aesthetic","neo-noir aesthetic","outsider art aesthetic","darkroom aesthetic","slow cinema aesthetic","technical drawing aesthetic","experimental theater aesthetic","brutalist noir aesthetic","brutalist aesthetic","90s zine aesthetic","millennium aesthetic"],
+  framing: ["eye-level medium shot","low angle wide shot","high angle full shot","extreme close-up","bird's eye overhead","worm's eye looking up","dutch angle canted frame","isometric view","axonometric projection","over-the-shoulder two-shot","cowboy shot wide","extreme wide establishing","deep focus pan","shallow depth of field foreground bokeh","split diopter dual plane","symmetrical center frame","negative space dominant","rule of thirds off-center","leading lines into depth","frame within frame","diagonal composition","silhouette backlit rim","foreground obstruction","rack focus pull","forced perspective distortion"]
+};
+
+const KEYS   = ["subject","genre","prop","echo","directive","era","framing"];
+const LABELS  = { subject:"Subject", genre:"Genre Fusion", prop:"Prop", echo:"Echo", directive:"Directive", era:"Era Anchor", framing:"Framing" };
+const CLS    = { subject:"cs", genre:"cg", prop:"cp", echo:"ce", directive:"cd", era:"cr", framing:"cf" };
+const COLORS = { subject:"#00ffe0", genre:"#ff8c42", prop:"#a8e063", echo:"#6ee7b7", directive:"#93c5fd", era:"#c4b5fd", framing:"#fbbf24" };
+
+/* ═══════════════════════════════════════════════════
+   FLAGS CONFIG
+═══════════════════════════════════════════════════ */
+const FLAGS = [
+  { id:"ar",      flag:"--ar",      value:"3:4",  desc:"Aspect ratio",           on:true,  editable:true  },
+  { id:"chaos",   flag:"--chaos",   value:"50",   desc:"Variation amount",        on:true,  editable:true  },
+  { id:"exp",     flag:"--exp",     value:"50",   desc:"Experimental rendering",  on:true,  editable:true  },
+  { id:"v",       flag:"--v",       value:"7",    desc:"Model version",           on:true,  editable:true  },
+  { id:"raw",     flag:"--raw",     value:"",     desc:"Less processed output",   on:true,  editable:false },
+  { id:"stylize", flag:"--stylize", value:"800",  desc:"Aesthetic strength",      on:true,  editable:true  },
+  { id:"ow",      flag:"--ow",      value:"550",  desc:"Outpainting width",       on:false, editable:true  },
+];
+
+let flagState  = {};
+let flagValues = {};
+FLAGS.forEach(f => { flagState[f.id] = f.on; flagValues[f.id] = f.value; });
+
+/* ═══════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════ */
+function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+function rslots() { const s={}; KEYS.forEach(k => s[k]=pick(V[k])); return s; }
+
+let slots   = rslots();
+let locked  = {};  KEYS.forEach(k => locked[k]=false);
+let customs = {};  KEYS.forEach(k => customs[k]='');
+let hist    = [];
+let count   = 0;
+let includeFlags = true;
+
+function val(k)  { return customs[k].trim() || slots[k]; }
+function flags() {
+  return FLAGS
+    .filter(f => flagState[f.id])
+    .map(f => f.editable ? `${f.flag} ${flagValues[f.id]}`.trim() : f.flag)
+    .join(' ');
+}
+function getP()  { return KEYS.map(k=>val(k)).join(', '); }
+function getFull(){ if (!includeFlags) return getP(); const f=flags(); return f ? `${getP()} ${f}` : getP(); }
+
+/* ═══════════════════════════════════════════════════
+   RENDER FLAGS
+═══════════════════════════════════════════════════ */
+function rFlags() {
+  document.getElementById('flags-card').innerHTML = FLAGS.map(f => `
+    <div class="flag-row${flagState[f.id] ? '' : ' disabled'}">
+      <div class="flag-left">
+        <label class="toggle">
+          <input type="checkbox" data-flag="${f.id}" ${flagState[f.id] ? 'checked' : ''}>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="flag-name">${f.flag}</span>
+        ${f.editable ? `<input class="flag-value-input" type="text" data-flag-val="${f.id}" value="${flagValues[f.id]}" spellcheck="false">` : ''}
+      </div>
+      <span class="flag-desc">${f.desc}</span>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('[data-flag]').forEach(cb => {
+    cb.onchange = () => {
+      flagState[cb.dataset.flag] = cb.checked;
+      cb.closest('.flag-row').classList.toggle('disabled', !cb.checked);
+      rOutput();
     };
+  });
 
-    const KEYS   = ["subject", "genre", "prop", "echo", "directive", "era"];
-    const LABELS  = { subject: "Subject", genre: "Genre Fusion", prop: "Prop", echo: "Echo", directive: "Directive", era: "Era Anchor" };
-    const CLS     = { subject: "cs", genre: "cg", prop: "cp", echo: "ce", directive: "cd", era: "cr" };
-
-    function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
-    function rslots() { const s = {}; KEYS.forEach(k => s[k] = pick(V[k])); return s; }
-
-    let slots  = rslots();
-    let locked = { subject: false, genre: false, prop: false, echo: false, directive: false, era: false };
-    let hist   = [];
-    let count  = 0;
-
-    function getP() {
-      return `${slots.subject} ${slots.genre}, ${slots.prop}, ${slots.echo}, ${slots.directive} ${slots.era}`;
-    }
-
-    function rPrompt() {
-      const el = document.getElementById("pg-text");
-      el.innerHTML = `<span class="cs">${slots.subject}</span> <span class="cg">${slots.genre}</span>, <span class="cp">${slots.prop}</span>, <span class="ce">${slots.echo}</span>, <span class="cd">${slots.directive}</span> <span class="cr">${slots.era}</span>`;
-      document.getElementById("pg-output").classList.toggle("has-content", el.textContent.trim().length > 0);
-    }
-
-    function rSlots() {
-      document.getElementById("pg-slots").innerHTML = KEYS.map(k => `
-        <div class="pg-slot${locked[k] ? ' locked' : ''}">
-          <div class="pg-slot-label">${LABELS[k]}</div>
-          <div class="pg-slot-value ${CLS[k]}">${slots[k]}</div>
-          <div class="pg-slot-actions">
-            <button class="pg-sbtn${locked[k] ? ' on' : ''}" data-lock="${k}">${locked[k] ? 'Locked' : 'Lock'}</button>
-            <button class="pg-sbtn" data-reroll="${k}" ${locked[k] ? 'disabled' : ''}>↺</button>
-          </div>
-        </div>`).join('');
-
-      document.querySelectorAll('[data-lock]').forEach(b =>
-        b.onclick = () => { locked[b.dataset.lock] = !locked[b.dataset.lock]; rSlots(); });
-
-      document.querySelectorAll('[data-reroll]').forEach(b =>
-        b.onclick = () => {
-          const k = b.dataset.reroll;
-          if (!locked[k]) { slots[k] = pick(V[k]); rPrompt(); rSlots(); }
-        });
-    }
-
-    function rHist() {
-      const w = document.getElementById("pg-hist-wrap");
-      if (!hist.length) { w.style.display = 'none'; return; }
-      w.style.display = 'block';
-      document.getElementById("pg-hist-list").innerHTML =
-        hist.map((p, i) => `<div class="pg-hist-item" data-hi="${i}">${p}</div>`).join('');
-      document.querySelectorAll('[data-hi]').forEach(el =>
-        el.onclick = () => navigator.clipboard.writeText(hist[el.dataset.hi]));
-    }
-
-    document.getElementById("pg-gen").onclick = () => {
-      hist = [getP(), ...hist].slice(0, 8);
-      KEYS.forEach(k => { if (!locked[k]) slots[k] = pick(V[k]); });
-      count++;
-      document.getElementById("pg-counter").textContent = `Output: ${String(count).padStart(3, '0')}`;
-      rPrompt(); rSlots(); rHist();
+  document.querySelectorAll('[data-flag-val]').forEach(inp => {
+    inp.oninput = () => {
+      flagValues[inp.dataset.flagVal] = inp.value.trim();
+      rOutput();
     };
+    // select all on focus for quick editing
+    inp.onfocus = () => inp.select();
+  });
+}
 
-    document.getElementById("pg-rst").onclick = () => {
-      slots  = rslots();
-      locked = { subject: false, genre: false, prop: false, echo: false, directive: false, era: false };
-      rPrompt(); rSlots();
+/* ═══════════════════════════════════════════════════
+   RENDER OUTPUT
+═══════════════════════════════════════════════════ */
+function rOutput() {
+  // colored prompt tokens
+  const html = [
+    `<span class="cs">${val('subject')}</span>`,
+    `<span class="cg">${val('genre')}</span>`,
+    `<span class="cp">${val('prop')}</span>`,
+    `<span class="ce">${val('echo')}</span>`,
+    `<span class="cd">${val('directive')}</span>`,
+    `<span class="cr">${val('era')}</span>`,
+    `<span class="cf">${val('framing')}</span>`,
+  ].join(', ');
+
+  document.getElementById('pg-text').innerHTML = html;
+
+  const f = flags();
+  const flagEl = document.getElementById('pg-flags-text');
+  if (f && includeFlags) {
+    flagEl.style.display = '';
+    flagEl.textContent = f;
+  } else {
+    flagEl.style.display = 'none';
+  }
+
+  document.getElementById('pg-output').classList.toggle('has-content', true);
+}
+
+/* ═══════════════════════════════════════════════════
+   RENDER SLOTS
+═══════════════════════════════════════════════════ */
+function rSlots() {
+  document.getElementById('pg-slots').innerHTML = KEYS.map(k => {
+    const isLocked = locked[k];
+    const options  = [...V[k]].sort((a,b)=>a.localeCompare(b)).map(v =>
+      `<option value="${v}" ${v===slots[k]?'selected':''}>${v}</option>`
+    ).join('');
+
+    return `
+    <div class="pg-slot${isLocked?' locked':''}" data-slot="${k}">
+      <div class="slot-header">
+        <div class="slot-label-group">
+          <div class="slot-color-dot" style="background:${COLORS[k]};"></div>
+          <span class="pg-slot-label">${LABELS[k]}</span>
+        </div>
+      </div>
+
+      <select class="slot-select" data-select="${k}" ${isLocked?'disabled':''}>
+        ${options}
+      </select>
+
+      <input
+        class="slot-input"
+        type="text"
+        placeholder="Override — type custom value…"
+        value="${customs[k]}"
+        data-input="${k}"
+        ${isLocked?'disabled':''}
+      />
+
+      <div class="slot-actions">
+        <button class="pg-sbtn${isLocked?' on':''}" data-lock="${k}">
+          ${isLocked?'Locked':'Lock'}
+        </button>
+        <button class="pg-sbtn reroll" data-reroll="${k}" ${isLocked?'disabled':''}>↺</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // select change → update slot value + output
+  document.querySelectorAll('[data-select]').forEach(el => {
+    el.onchange = () => {
+      const k = el.dataset.select;
+      if (!locked[k]) { slots[k] = el.value; rOutput(); }
     };
+  });
 
-    document.getElementById("pg-copy").onclick = function () {
-      navigator.clipboard.writeText(getP()).then(() => {
-        this.textContent = '✓ Copied';
-        this.classList.add('ok');
-        setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('ok'); }, 1800);
-      });
+  // custom input → override
+  document.querySelectorAll('[data-input]').forEach(el => {
+    el.oninput = () => {
+      const k = el.dataset.input;
+      customs[k] = el.value;
+      rOutput();
     };
+  });
 
-    rPrompt(); rSlots();
-  </script>
+  // lock toggle
+  document.querySelectorAll('[data-lock]').forEach(b => {
+    b.onclick = () => {
+      const k = b.dataset.lock;
+      locked[k] = !locked[k];
+      rSlots();
+    };
+  });
+
+  // reroll
+  document.querySelectorAll('[data-reroll]').forEach(b => {
+    b.onclick = () => {
+      const k = b.dataset.reroll;
+      if (!locked[k]) { slots[k]=pick(V[k]); customs[k]=''; rOutput(); rSlots(); }
+    };
+  });
+}
+
+/* ═══════════════════════════════════════════════════
+   HISTORY
+═══════════════════════════════════════════════════ */
+function rHist() {
+  const w = document.getElementById('pg-hist-wrap');
+  if (!hist.length) { w.style.display='none'; return; }
+  w.style.display='block';
+  document.getElementById('pg-hist-list').innerHTML =
+    hist.map((p,i)=>`<div class="pg-hist-item" data-hi="${i}">${p}</div>`).join('');
+  document.querySelectorAll('[data-hi]').forEach(el =>
+    el.onclick = () => navigator.clipboard.writeText(hist[el.dataset.hi]));
+}
+
+/* ═══════════════════════════════════════════════════
+   EVENTS
+═══════════════════════════════════════════════════ */
+document.getElementById('pg-gen').onclick = () => {
+  hist = [getFull(), ...hist].slice(0,8);
+  KEYS.forEach(k => { if (!locked[k]) { slots[k]=pick(V[k]); customs[k]=''; } });
+  count++;
+  document.getElementById('pg-counter').textContent = `Output: ${String(count).padStart(3,'0')}`;
+  rOutput(); rSlots(); rHist();
+};
+
+document.getElementById('pg-rst').onclick = () => {
+  slots = rslots();
+  KEYS.forEach(k => { locked[k]=false; customs[k]=''; });
+  rOutput(); rSlots();
+};
+
+document.getElementById('pg-copy').onclick = function() {
+  navigator.clipboard.writeText(getFull()).then(() => {
+    this.textContent='✓ Copied';
+    this.classList.add('ok');
+    setTimeout(()=>{ this.textContent='Copy'; this.classList.remove('ok'); }, 1800);
+  });
+};
+
+/* ═══════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════ */
+rFlags();
+rOutput();
+rSlots();
+
+document.getElementById('flags-toggle').onchange = function() {
+  includeFlags = this.checked;
+  rOutput();
+};
+
+// Discrete sticky copy pill — appears when output panel scrolls out of view
+const stickyPill = document.getElementById('sticky-copy');
+
+const pillObserver = new IntersectionObserver(
+  ([entry]) => stickyPill.classList.toggle('visible', !entry.isIntersecting),
+  { threshold: 0 }
+);
+pillObserver.observe(document.getElementById('pg-output'));
+
+stickyPill.onclick = function() {
+  navigator.clipboard.writeText(getFull()).then(() => {
+    this.classList.add('ok');
+    setTimeout(() => this.classList.remove('ok'), 1800);
+  });
+};
+
+// Flags collapse toggle
+let flagsCollapsed = false;
+document.getElementById('flags-header').onclick = () => {
+  flagsCollapsed = !flagsCollapsed;
+  document.getElementById('flags-body').classList.toggle('collapsed', flagsCollapsed);
+  document.getElementById('flags-chevron').classList.toggle('collapsed', flagsCollapsed);
+};
+</script>
 </body>
 </html>
