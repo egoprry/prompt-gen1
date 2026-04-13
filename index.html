@@ -8,28 +8,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* ── shadcn/ui Dark Theme Tokens ── */
+    /* ── Geist Design System – Dark Mode Tokens ── */
     :root {
-      --background:    hsl(240 10% 3.9%);
-      --foreground:    hsl(0 0% 98%);
-      --card:          hsl(240 10% 3.9%);
-      --card-foreground: hsl(0 0% 98%);
-      --popover:       hsl(240 10% 3.9%);
-      --primary:       hsl(0 0% 98%);
-      --primary-foreground: hsl(240 5.9% 10%);
-      --secondary:     hsl(240 3.7% 15.9%);
-      --secondary-foreground: hsl(0 0% 98%);
-      --muted:         hsl(240 3.7% 15.9%);
-      --muted-foreground: hsl(240 5% 64.9%);
-      --accent:        hsl(240 3.7% 15.9%);
-      --accent-foreground: hsl(0 0% 98%);
-      --destructive:   hsl(0 62.8% 30.6%);
-      --destructive-foreground: hsl(0 0% 98%);
-      --border:        hsl(240 3.7% 15.9%);
-      --input:         hsl(240 3.7% 15.9%);
-      --ring:          hsl(240 4.9% 83.9%);
+      --ds-bg-100:    #000000;
+      --ds-bg-200:    #0a0a0a;
+      --ds-gray-100:  #111111;
+      --ds-gray-200:  #1a1a1a;
+      --ds-gray-300:  #262626;
+      --ds-gray-400:  #363636;
+      --ds-gray-500:  #4a4a4a;
+      --ds-gray-600:  #787878;
+      --ds-gray-700:  #a8a8a8;
+      --ds-gray-800:  #b4b4b4;
+      --ds-gray-900:  #e8e8e8;
+      --ds-gray-1000: #ffffff;
 
-      /* Prompt token colors – kept from original */
+      --accent:        #00ffe0;
+      --accent-subtle: rgba(0,255,224,0.07);
+      --accent-border: rgba(0,255,224,0.28);
+      --accent-dim:    rgba(0,255,224,0.60);
+
+      --red:        #ff5555;
+      --red-subtle: rgba(255,85,85,0.08);
+      --red-border: rgba(255,85,85,0.32);
+      --red-dim:    rgba(255,85,85,0.60);
+
+      --border:       var(--ds-gray-400);
+      --border-hover: var(--ds-gray-600);
+      --surface:      #0d0d0d;
+
+      --text-primary:   var(--ds-gray-1000);
+      --text-secondary: var(--ds-gray-800);
+      --text-tertiary:  var(--ds-gray-700);
+
+      /* Prompt token colors */
       --c-subject:   #00ffe0;
       --c-genre:     #ff8c42;
       --c-prop:      #a8e063;
@@ -38,15 +50,17 @@
       --c-era:       #c4b5fd;
       --c-framing:   #fbbf24;
 
-      --radius: 0.5rem;
+      --radius-sm: 5px;
+      --radius-md: 6px;
+      --radius-lg: 8px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--background);
+      background: var(--ds-bg-100);
       font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--foreground);
+      color: var(--text-primary);
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
@@ -65,11 +79,12 @@
 
     /* ── Section label ── */
     .section-label {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted-foreground);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
       margin-bottom: 12px;
-      letter-spacing: -0.01em;
     }
 
     /* ── Divider ── */
@@ -92,20 +107,21 @@
 
     .pg-eyebrow {
       font-family: 'Geist Mono', monospace;
-      font-size: 12px;
-      color: var(--muted-foreground);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
       margin-bottom: 10px;
     }
 
     .pg-title {
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 700;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.03em;
       line-height: 1;
-      color: var(--foreground);
     }
 
-    .pg-title-accent { color: var(--foreground); opacity: 0.5; }
+    .pg-title-accent { color: var(--accent); }
 
     .pg-meta {
       display: flex;
@@ -121,8 +137,8 @@
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
       font-weight: 500;
-      color: var(--foreground);
-      background: var(--secondary);
+      color: var(--ds-gray-900);
+      background: var(--ds-gray-200);
       border: 1px solid var(--border);
       padding: 5px 12px;
       border-radius: 999px;
@@ -131,20 +147,21 @@
     .pg-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: hsl(142 71% 45%);
-      box-shadow: 0 0 8px hsl(142 71% 45% / 0.6);
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
       flex-shrink: 0;
       animation: pulse 2.4s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%,100% { opacity:1; } 50% { opacity:0.2; }
+      0%,100% { opacity:1; } 50% { opacity:0.15; }
     }
 
     .pg-meta-row {
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
-      color: var(--muted-foreground);
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
     }
 
     /* ════════════════════════════════════════
@@ -163,16 +180,16 @@
       user-select: none;
     }
 
-    .flags-section-header:hover .section-label { color: var(--foreground); }
+    .flags-section-header:hover .section-label { color: var(--text-secondary); }
 
     .flags-chevron {
       display: flex;
       align-items: center;
-      color: var(--muted-foreground);
+      color: var(--ds-gray-600);
       transition: transform 0.2s ease, color 0.1s ease;
     }
 
-    .flags-section-header:hover .flags-chevron { color: var(--foreground); }
+    .flags-section-header:hover .flags-chevron { color: var(--text-secondary); }
 
     .flags-chevron.collapsed { transform: rotate(-90deg); }
 
@@ -186,9 +203,9 @@
     }
 
     .flags-card {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--radius-lg);
       overflow: hidden;
     }
 
@@ -197,12 +214,12 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--ds-gray-300);
       transition: background 0.1s ease;
     }
 
     .flag-row:last-child { border-bottom: none; }
-    .flag-row:hover { background: var(--secondary); }
+    .flag-row:hover { background: var(--ds-gray-100); }
 
     .flag-left {
       display: flex;
@@ -214,41 +231,41 @@
       font-family: 'Geist Mono', monospace;
       font-size: 13px;
       font-weight: 500;
-      color: var(--foreground);
+      color: var(--text-primary);
       white-space: nowrap;
     }
 
-    .flag-row.disabled .flag-name { color: var(--muted-foreground); }
+    .flag-row.disabled .flag-name { color: var(--text-tertiary); }
 
     .flag-value-input {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
       font-weight: 500;
-      color: var(--foreground);
-      background: var(--secondary);
-      border: 1px solid var(--border);
-      border-radius: calc(var(--radius) - 2px);
-      padding: 4px 8px;
+      color: var(--text-primary);
+      background: var(--ds-gray-200);
+      border: 1px solid var(--ds-gray-400);
+      border-radius: var(--radius-sm);
+      padding: 3px 8px;
       width: 68px;
       text-align: center;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: border-color 0.1s ease, background 0.1s ease;
     }
 
-    .flag-value-input:hover { border-color: hsl(240 5% 34%); }
+    .flag-value-input:hover { border-color: var(--border-hover); }
     .flag-value-input:focus {
       outline: none;
-      border-color: var(--ring);
-      box-shadow: 0 0 0 2px hsl(240 4.9% 83.9% / 0.15);
+      border-color: var(--ds-gray-700);
+      background: var(--ds-gray-300);
     }
     .flag-row.disabled .flag-value-input { opacity: 0.35; }
 
     .flag-desc {
       font-size: 12px;
-      color: var(--muted-foreground);
+      color: var(--text-secondary);
       text-align: right;
     }
 
-    /* Toggle switch – shadcn style */
+    /* Geist toggle switch */
     .toggle {
       position: relative;
       width: 36px;
@@ -268,13 +285,13 @@
       position: absolute;
       inset: 0;
       border-radius: 999px;
-      background: hsl(240 3.7% 25%);
+      background: var(--ds-gray-400);
       transition: background 0.15s ease;
       cursor: pointer;
     }
 
     .toggle input:checked + .toggle-track {
-      background: var(--foreground);
+      background: var(--ds-gray-1000);
     }
 
     .toggle-thumb {
@@ -282,7 +299,7 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: var(--background);
+      background: var(--ds-gray-800);
       top: 3px;
       left: 3px;
       transition: transform 0.15s ease, background 0.15s ease;
@@ -291,7 +308,7 @@
 
     .toggle input:checked ~ .toggle-thumb {
       transform: translateX(16px);
-      background: var(--background);
+      background: var(--ds-bg-100);
     }
 
     /* ════════════════════════════════════════
@@ -306,37 +323,35 @@
     }
 
     .pg-output {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border-bottom: none;
+      border-radius: var(--radius-lg);
       padding: 20px 24px;
       position: relative;
       min-height: 100px;
       transition: border-color 0.15s ease;
     }
 
-    .pg-output.has-content { border-color: hsl(240 5% 26%); }
+    .pg-output.has-content { border-color: var(--accent-border); }
 
     .pg-output-prompt {
       font-family: 'Geist Mono', monospace;
       font-size: 14px;
       line-height: 1.8;
       word-break: break-word;
-      color: var(--foreground);
+      color: var(--ds-gray-1000);
       min-height: 28px;
       padding-right: 90px;
+
     }
 
     .pg-output-flags {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      color: var(--muted-foreground);
+      color: var(--ds-gray-800);
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--ds-gray-300);
       word-break: break-all;
     }
 
@@ -344,27 +359,28 @@
       position: absolute;
       top: 14px;
       right: 14px;
-      background: var(--secondary);
+      background: var(--ds-gray-200);
       border: 1px solid var(--border);
-      color: var(--foreground);
+      color: var(--ds-gray-900);
       font-family: 'Geist', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      padding: 6px 14px;
-      border-radius: calc(var(--radius) - 2px);
+      padding: 5px 14px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.1s ease;
     }
 
     .pg-copy:hover {
-      background: hsl(240 3.7% 20%);
-      border-color: hsl(240 5% 26%);
+      background: var(--ds-gray-300);
+      border-color: var(--border-hover);
+      color: var(--ds-gray-1000);
     }
 
     .pg-copy.ok {
-      background: hsl(142 71% 45% / 0.12);
-      border-color: hsl(142 71% 45% / 0.3);
-      color: hsl(142 71% 45%);
+      background: var(--accent-subtle);
+      border-color: var(--accent-border);
+      color: var(--accent);
     }
 
     /* ════════════════════════════════════════
@@ -384,14 +400,11 @@
       gap: 12px;
     }
 
-    @media (max-width: 600px) {
-      .pg-slots { grid-template-columns: 1fr; }
-    }
-
+    /* slot card */
     .pg-slot {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: var(--radius-lg);
       padding: 20px;
       display: flex;
       flex-direction: column;
@@ -400,10 +413,11 @@
     }
 
     .pg-slot.locked {
-      border-color: hsl(240 5% 26%);
-      background: hsl(240 3.7% 15.9% / 0.5);
+      border-color: var(--accent-border);
+      background: var(--accent-subtle);
     }
 
+    /* slot header row */
     .slot-header {
       display: flex;
       align-items: center;
@@ -424,59 +438,56 @@
     }
 
     .pg-slot-label {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--muted-foreground);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
     }
 
-    /* shadcn select */
+    /* Geist-style select */
     .slot-select {
       width: 100%;
-      background: var(--secondary);
-      border: 1px solid var(--border);
-      color: var(--foreground);
+      background: var(--ds-gray-100);
+      border: 1px solid var(--ds-gray-400);
+      color: var(--text-primary);
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      padding: 8px 32px 8px 12px;
-      border-radius: calc(var(--radius) - 2px);
+      padding: 8px 32px 8px 10px;
+      border-radius: var(--radius-sm);
       cursor: pointer;
       appearance: none;
       -webkit-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 10px center;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: border-color 0.1s ease;
       line-height: 1.4;
     }
 
-    .slot-select:hover { border-color: hsl(240 5% 34%); }
-    .slot-select:focus {
-      outline: none;
-      border-color: var(--ring);
-      box-shadow: 0 0 0 2px hsl(240 4.9% 83.9% / 0.15);
-    }
+    .slot-select:hover { border-color: var(--border-hover); }
+    .slot-select:focus { outline: none; border-color: var(--ds-gray-700); }
     .slot-select:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    /* shadcn input */
+    /* Geist-style text input */
     .slot-input {
       width: 100%;
-      background: var(--secondary);
-      border: 1px solid var(--border);
-      color: var(--foreground);
+      background: var(--ds-gray-100);
+      border: 1px solid var(--ds-gray-400);
+      color: var(--text-primary);
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      padding: 8px 12px;
-      border-radius: calc(var(--radius) - 2px);
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      transition: border-color 0.1s ease;
     }
 
-    .slot-input::placeholder { color: var(--muted-foreground); }
-    .slot-input:hover { border-color: hsl(240 5% 34%); }
+    .slot-input::placeholder { color: var(--ds-gray-500); }
+    .slot-input:hover { border-color: var(--border-hover); }
 
     .slot-input:focus {
       outline: none;
-      border-color: var(--ring);
-      box-shadow: 0 0 0 2px hsl(240 4.9% 83.9% / 0.15);
+      border-color: var(--ds-gray-700);
     }
 
     .slot-input:disabled { opacity: 0.35; cursor: not-allowed; }
@@ -490,33 +501,34 @@
     .pg-sbtn {
       flex: 1;
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
+      border: 1px solid var(--ds-gray-400);
+      color: var(--text-secondary);
       font-family: 'Geist', sans-serif;
       font-size: 11px;
       font-weight: 500;
       padding: 7px 8px;
-      border-radius: calc(var(--radius) - 2px);
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.1s ease;
       text-align: center;
       white-space: nowrap;
     }
 
     .pg-sbtn:hover:not(:disabled) {
-      background: var(--secondary);
-      border-color: hsl(240 5% 26%);
-      color: var(--foreground);
+      background: var(--ds-gray-200);
+      border-color: var(--border-hover);
+      color: var(--ds-gray-1000);
     }
 
     .pg-sbtn.on {
-      background: var(--foreground);
-      border-color: var(--foreground);
-      color: var(--background);
+      background: var(--accent-subtle);
+      border-color: var(--accent-border);
+      color: var(--accent-dim);
     }
 
     .pg-sbtn.on:hover {
-      background: hsl(0 0% 85%);
+      color: var(--accent);
+      background: rgba(0,255,224,0.1);
     }
 
     .pg-sbtn.reroll {
@@ -537,39 +549,39 @@
 
     .pg-gen {
       flex: 1;
-      background: var(--foreground);
-      border: 1px solid var(--foreground);
-      color: var(--background);
+      background: var(--ds-gray-200);
+      border: 1px solid var(--ds-gray-500);
+      color: var(--ds-gray-900);
       font-family: 'Geist', sans-serif;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: -0.01em;
       padding: 12px 0;
-      border-radius: calc(var(--radius) - 2px);
+      border-radius: var(--radius-md);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.1s ease;
     }
 
-    .pg-gen:hover { background: hsl(0 0% 85%); border-color: hsl(0 0% 85%); }
-    .pg-gen:active { transform: scale(0.997); }
+    .pg-gen:hover { background: var(--ds-gray-300); border-color: var(--ds-gray-600); color: var(--ds-gray-1000); }
+    .pg-gen:active { transform: scale(0.997); background: var(--ds-gray-400); }
 
     .pg-rst {
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted-foreground);
+      border: 1px solid var(--red-border);
+      color: var(--red-dim);
       font-family: 'Geist', sans-serif;
       font-size: 13px;
       font-weight: 500;
       padding: 12px 24px;
-      border-radius: calc(var(--radius) - 2px);
+      border-radius: var(--radius-md);
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.1s ease;
     }
 
     .pg-rst:hover {
-      background: var(--destructive);
-      border-color: var(--destructive);
-      color: var(--destructive-foreground);
+      background: var(--red-subtle);
+      border-color: var(--red);
+      color: var(--red);
     }
 
     /* ════════════════════════════════════════
@@ -585,33 +597,35 @@
     }
 
     .pg-hist-label {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted-foreground);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
     }
 
     .hist-hint {
       font-size: 11px;
-      color: var(--muted-foreground);
+      color: var(--ds-gray-700);
     }
 
     .pg-hist-item {
       font-family: 'Geist Mono', monospace;
       font-size: 12px;
-      color: var(--muted-foreground);
+      color: var(--text-secondary);
       padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: calc(var(--radius) - 2px);
+      border: 1px solid var(--ds-gray-300);
+      border-radius: var(--radius-md);
       margin-bottom: 6px;
       cursor: pointer;
       line-height: 1.65;
-      transition: all 0.15s ease;
+      transition: all 0.1s ease;
     }
 
     .pg-hist-item:hover {
-      border-color: hsl(240 5% 26%);
-      color: var(--foreground);
-      background: var(--secondary);
+      border-color: var(--border-hover);
+      color: var(--ds-gray-1000);
+      background: var(--ds-gray-100);
     }
 
     /* ── Token colors ── */
@@ -630,9 +644,10 @@
       justify-content: space-between;
       margin-top: 0;
       padding: 10px 16px;
-      background: var(--secondary);
+      background: var(--ds-gray-100);
       border: 1px solid var(--border);
-      border-radius: 0 0 var(--radius) var(--radius);
+      border-top: 1px solid var(--ds-gray-300);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     }
 
     .output-footer-label {
@@ -641,20 +656,27 @@
       gap: 10px;
       font-size: 12px;
       font-weight: 500;
-      color: var(--muted-foreground);
+      color: var(--text-secondary);
       cursor: pointer;
       user-select: none;
     }
 
-    .output-footer-label:hover { color: var(--foreground); }
+    .output-footer-label:hover { color: var(--text-primary); }
+
+    /* connect output card to footer */
+    .pg-output {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom: none;
+    }
 
     .output-footer-hint {
       font-family: 'Geist Mono', monospace;
       font-size: 11px;
-      color: var(--muted-foreground);
+      color: var(--ds-gray-700);
     }
 
-    /* ── Sticky copy pill ── */
+    /* ── Discrete sticky copy pill ── */
     .sticky-copy {
       position: fixed;
       bottom: 28px;
@@ -666,13 +688,13 @@
       font-family: 'Geist', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      color: var(--muted-foreground);
-      background: var(--card);
-      border: 1px solid var(--border);
+      color: var(--ds-gray-700);
+      background: var(--ds-gray-100);
+      border: 1px solid var(--ds-gray-400);
       border-radius: 999px;
       padding: 7px 14px 7px 11px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: color 0.12s ease, border-color 0.12s ease, background 0.12s ease, opacity 0.25s ease;
       opacity: 0;
       pointer-events: none;
     }
@@ -683,15 +705,15 @@
     }
 
     .sticky-copy:hover {
-      color: var(--foreground);
-      border-color: hsl(240 5% 26%);
-      background: var(--secondary);
+      color: var(--ds-gray-900);
+      border-color: var(--ds-gray-600);
+      background: var(--ds-gray-200);
     }
 
     .sticky-copy.ok {
-      color: hsl(142 71% 45%);
-      border-color: hsl(142 71% 45% / 0.3);
-      background: hsl(142 71% 45% / 0.1);
+      color: var(--accent);
+      border-color: var(--accent-border);
+      background: var(--accent-subtle);
     }
 
     @media (max-width: 768px) {
@@ -776,7 +798,7 @@
     <div id="pg-hist-list"></div>
   </div>
 
-  <!-- ── Sticky copy pill ── -->
+  <!-- ── Discrete sticky copy pill ── -->
   <button class="sticky-copy" id="sticky-copy" aria-label="Copy prompt">
     <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
@@ -877,6 +899,7 @@ function rFlags() {
       flagValues[inp.dataset.flagVal] = inp.value.trim();
       rOutput();
     };
+    // select all on focus for quick editing
     inp.onfocus = () => inp.select();
   });
 }
@@ -885,6 +908,7 @@ function rFlags() {
    RENDER OUTPUT
 ═══════════════════════════════════════════════════ */
 function rOutput() {
+  // colored prompt tokens
   const html = [
     `<span class="cs">${val('subject')}</span>`,
     `<span class="cg">${val('genre')}</span>`,
@@ -950,6 +974,7 @@ function rSlots() {
     </div>`;
   }).join('');
 
+  // select change → update slot value + output
   document.querySelectorAll('[data-select]').forEach(el => {
     el.onchange = () => {
       const k = el.dataset.select;
@@ -957,6 +982,7 @@ function rSlots() {
     };
   });
 
+  // custom input → override
   document.querySelectorAll('[data-input]').forEach(el => {
     el.oninput = () => {
       const k = el.dataset.input;
@@ -965,6 +991,7 @@ function rSlots() {
     };
   });
 
+  // lock toggle
   document.querySelectorAll('[data-lock]').forEach(b => {
     b.onclick = () => {
       const k = b.dataset.lock;
@@ -973,6 +1000,7 @@ function rSlots() {
     };
   });
 
+  // reroll
   document.querySelectorAll('[data-reroll]').forEach(b => {
     b.onclick = () => {
       const k = b.dataset.reroll;
@@ -1031,6 +1059,7 @@ document.getElementById('flags-toggle').onchange = function() {
   rOutput();
 };
 
+// Discrete sticky copy pill — appears when output panel scrolls out of view
 const stickyPill = document.getElementById('sticky-copy');
 
 const pillObserver = new IntersectionObserver(
@@ -1046,6 +1075,7 @@ stickyPill.onclick = function() {
   });
 };
 
+// Flags collapse toggle
 let flagsCollapsed = false;
 document.getElementById('flags-header').onclick = () => {
   flagsCollapsed = !flagsCollapsed;
